@@ -23,12 +23,12 @@ pipeline {
             }
         }
 
-   #     stage('Prepare Environment') {
-   #             // Assuming .env file is stored in a secure location
-   #         steps {
-   #             sh 'cp /home/.env .'
-   #         }
-   #     }
+   //     stage('Prepare Environment') {
+   //             // Assuming .env file is stored in a secure location
+   //         steps {
+//             sh 'cp /home/.env .'
+  // #         }
+   //#     }
 
         stage('Install Dependencies') {
             steps {
