@@ -1,3 +1,4 @@
+import os
 import psycopg2
 import csv
 from datetime import datetime
@@ -5,7 +6,7 @@ from minio import Minio
 
 
 def extract_data():
-    conn = psycopg2.connect(database="data_engineering", user="admin", password="root", host="localhost", port="5433")
+    conn = psycopg2.connect(database=os.environ['database_name'], user=os.environ['user_name'], password=os.environ['password_value'], host=os.environ['host_name'], port=os.environ['port_number'])
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM sensor_data;")
     data = cursor.fetchall()
