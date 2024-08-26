@@ -15,6 +15,13 @@ pipeline {
             }
         }
 
+        stage('Prepare Environment') {
+            steps {
+                // Assuming .env file is stored in a secure location
+                sh 'cp /Users/vrams/Master/81-Github/DataEngineering/00-master/DEG08-data-engineering-ci-cd-pipieline/.env .'
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 script {
