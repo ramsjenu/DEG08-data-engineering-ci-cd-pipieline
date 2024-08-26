@@ -2,6 +2,14 @@ pipeline {
     
     agent any
     
+    environment {
+        DATABASE_NAME = credentials('db-name-id')
+        USER_NAME = credentials('user-name-id')
+        PASSWORD_VALUE = credentials('password-id')
+        HOST_NAME = credentials('host-name-id')
+        PORT_NUMBER = credentials('port-number-id')
+    }
+
     tools {
         git 'Default' // This should match the name you configured in Global Tool Configuration
     }
@@ -15,12 +23,12 @@ pipeline {
             }
         }
 
-        stage('Prepare Environment') {
-            steps {
-                // Assuming .env file is stored in a secure location
-                sh 'cp /home/.env .'
-            }
-        }
+   #     stage('Prepare Environment') {
+   #             // Assuming .env file is stored in a secure location
+   #         steps {
+   #             sh 'cp /home/.env .'
+   #         }
+   #     }
 
         stage('Install Dependencies') {
             steps {
