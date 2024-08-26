@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the code from a Git repository
-                git branch: 'main', url: 'https://github.com/ramsjenu/data-engineering-pipeline.git'
+                git branch: 'main', url: 'https://github.com/ramsjenu/DEG08-data-engineering-ci-cd-pipieline.git'
             }
         }
 
