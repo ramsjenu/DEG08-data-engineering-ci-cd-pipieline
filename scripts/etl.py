@@ -1,12 +1,27 @@
 import os
 import psycopg2
 import csv
+from dotenv import load_dotenv
 from datetime import datetime
 from minio import Minio
 
+load_dotenv()
+
+database_name = os.getenv('DATABASE_NAME', 'default_db_name')
+user_name = os.getenv('USER_NAME', 'default_user')
+password_value = os.getenv('PASSWORD_VALUE', 'default_password')
+host_name = os.getenv('HOST_NAME', 'localhost')
+port_number = int(os.getenv('PORT_NUMBER', 5432))
+
 
 def extract_data():
-    conn = psycopg2.connect(database=os.environ['database_name'], user=os.environ['user_name'], password=os.environ['password_value'], host=os.environ['host_name'], port=os.environ['port_number'])
+    conn = psycopg2.connect(database = database_name, 
+                            user = user_name, 
+                            password = password_value,
+                            host = host_name,
+                            port = port_number,
+                            connect_timeout=100)
+
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM sensor_data;")
     data = cursor.fetchall()
@@ -35,7 +50,7 @@ def load_data(transformed):
             writer.writerow(row)
 
     minio_client = Minio(
-        "localhost:9000",
+        "minio:9000",
         access_key="minio",
         secret_key="minio123",
         secure=False
